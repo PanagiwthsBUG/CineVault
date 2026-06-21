@@ -2,14 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
+const { getAllMovies } = require("../controllers/movieController");
 
-router.get("/", (req,res)=>{
-
-    res.json({
-        message:"Movies endpoint works"
-    });
-
-});
-
+router.get("/", getAllMovies);
 
 module.exports = router;

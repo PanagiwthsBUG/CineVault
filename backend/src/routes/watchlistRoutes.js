@@ -6,6 +6,8 @@ const authMiddleware = require("../middleware/authMiddleware");
 const {
   addToWatchlist,
   getWatchlist,
+  updateWatchlistStatus,
+  deleteFromWatchlist,
 } = require("../controllers/watchlistController");
 
 router.post(
@@ -18,6 +20,19 @@ router.get(
   "/",
   authMiddleware,
   getWatchlist
+);
+
+router.put(
+  "/:id",
+  authMiddleware,
+  updateWatchlistStatus
+);
+
+
+router.delete(
+  "/:id",
+  authMiddleware,
+  deleteFromWatchlist
 );
 
 module.exports = router;

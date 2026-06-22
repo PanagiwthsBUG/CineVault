@@ -96,3 +96,5 @@ ON watchlists(user_id);
 CREATE INDEX idx_reviews_movie
 ON reviews(movie_id);
 
+ALTER TABLE movies
+ALTER COLUMN tmdb_id TYPE VARCHAR(50);

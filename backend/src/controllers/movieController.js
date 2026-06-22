@@ -121,7 +121,7 @@ await pool.query(
 `
 SELECT *
 FROM movies
-WHERE tmdb_id = $1
+WHERE external_id = $1
 `,
 [
  imdbID
@@ -146,7 +146,7 @@ await pool.query(
 `
 INSERT INTO movies
 (
- tmdb_id,
+ external_id,
  title,
  release_year,
  poster_url

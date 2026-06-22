@@ -13,7 +13,7 @@ CREATE TABLE users (
 CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
 
-    tmdb_id INTEGER UNIQUE NOT NULL,
+    external_id VARCHAR(50),
 
     title VARCHAR(255) NOT NULL,
 

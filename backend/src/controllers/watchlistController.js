@@ -45,6 +45,9 @@ const addToWatchlist = async (req, res) => {
 };
 
 const getWatchlist = async (req, res) => {
+
+  //console.log("🔥 GET WATCHLIST HIT");    for debugging
+
   try {
 
     const userId = req.user.id;

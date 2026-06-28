@@ -1,5 +1,8 @@
 import { useState } from "react";
+
 import api from "../api/axios";
+
+import MovieCard from "../components/MovieCard";
 
 function Search() {
 
@@ -69,77 +72,86 @@ function Search() {
   };
 
 
-  return (
-    <div>
+return (
 
-      <h1>CineVault Search</h1>
-
-
-      <form onSubmit={searchMovies}>
-
-        <input
-          placeholder="Search movie..."
-          value={query}
-          onChange={(e) =>
-            setQuery(e.target.value)
-          }
-        />
-
-        <button>
-          Search
-        </button>
-
-      </form>
+<div className="container py-5">
 
 
-      <hr />
+<h1 className="text-center mb-4">
+  🎬 CineVault Search
+</h1>
 
 
-      {movies.map((movie) => (
 
-        <div key={movie.imdbID}>
-
-
-          <h2>
-            {movie.Title}
-          </h2>
+<form
+  onSubmit={searchMovies}
+  className="d-flex gap-2 mb-5"
+>
 
 
-          <p>
-            {movie.Year}
-          </p>
+<input
+
+  className="form-control"
+
+  placeholder="Search movie..."
+
+  value={query}
+
+  onChange={(e)=>
+    setQuery(e.target.value)
+  }
+
+/>
 
 
-          {movie.Poster !== "N/A" &&
-            <img
-              src={movie.Poster}
-              width="150"
-            />
-          }
+<button
+  className="btn btn-warning"
+>
+
+Search
+
+</button>
 
 
-          <br />
+</form>
 
 
-          <button
-            onClick={() =>
-              addToWatchlist(movie)
-            }
-          >
-            Add to Watchlist
-          </button>
 
 
-          <hr />
-
-        </div>
-
-      ))}
+<div className="row g-4">
 
 
-    </div>
-  );
+{movies.map((movie)=>(
+
+
+<div
+  className="col-12 col-md-4 col-lg-3"
+  key={movie.imdbID}
+>
+
+
+<MovieCard
+
+ movie={movie}
+
+ onAdd={addToWatchlist}
+
+/>
+
+
+</div>
+
+
+))}
+
+
+</div>
+
+
+</div>
+
+);
+
 }
-
 
 export default Search;

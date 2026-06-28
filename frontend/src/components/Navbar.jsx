@@ -12,34 +12,69 @@ function Navbar() {
 
   };
 
+
   return (
 
-    <nav>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
-      <h2>CineVault 🎬</h2>
+      <div className="container">
 
-      <Link to="/">Home</Link>
 
-      {" | "}
+        <Link
+          className="navbar-brand fw-bold"
+          to="/"
+        >
+          🎬 CineVault
+        </Link>
 
-      <Link to="/search">Search</Link>
 
-      {" | "}
 
-      <Link to="/watchlist">Watchlist</Link>
+        <div className="navbar-nav ms-auto">
 
-      {" | "}
 
-      <button onClick={logout}>
-        Logout
-      </button>
+          <Link
+            className="nav-link"
+            to="/"
+          >
+            Home
+          </Link>
 
-      <hr />
+
+          <Link
+            className="nav-link"
+            to="/search"
+          >
+            Search
+          </Link>
+
+
+          <Link
+            className="nav-link"
+            to="/watchlist"
+          >
+            Watchlist
+          </Link>
+
+
+
+          <button
+            className="btn btn-warning ms-3"
+            onClick={logout}
+          >
+            Logout
+          </button>
+
+
+        </div>
+
+
+      </div>
 
     </nav>
 
   );
 
 }
+
 
 export default Navbar;

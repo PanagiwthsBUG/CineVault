@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Search from "./pages/Search";
 import Watchlist from "./pages/Watchlist";
+import Home from "./pages/Home";
 
 function App() {
 
@@ -43,6 +44,10 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/"
+        element={<Home />}
+        />
     </Routes>
 
   );

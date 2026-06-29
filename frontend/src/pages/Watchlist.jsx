@@ -17,7 +17,6 @@ function Watchlist() {
 
       setMovies(response.data);
 
-
     } catch (error) {
 
       console.error(
@@ -25,6 +24,7 @@ function Watchlist() {
       );
 
     }
+
   };
 
 
@@ -52,7 +52,7 @@ function Watchlist() {
       );
 
 
-    } catch(error){
+    } catch(error) {
 
       console.error(error);
 
@@ -62,61 +62,287 @@ function Watchlist() {
 
 
 
+  const updateStatus = async (id, status) => {
+
+    try {
+
+      await api.put(
+        `/watchlist/${id}`,
+        {
+          status
+        }
+      );
+
+
+      setMovies(
+
+        movies.map(movie =>
+
+          movie.id === id
+
+            ? {
+                ...movie,
+                status
+              }
+
+            : movie
+
+        )
+
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  };
+
+
+
+  const getStatusClass = (status) => {
+
+    switch (status) {
+
+      case "watching":
+        return "bg-warning text-dark";
+
+
+      case "completed":
+        return "bg-success";
+
+
+      case "plan_to_watch":
+        return "bg-primary";
+
+
+      default:
+        return "bg-secondary";
+
+    }
+
+  };
+
+
+
+  const getStatusLabel = (status) => {
+
+    switch(status) {
+
+      case "watching":
+        return "🍿 Watching";
+
+      case "completed":
+        return "✅ Completed";
+
+      case "plan_to_watch":
+        return "📌 Plan To Watch";
+
+      default:
+        return status;
+
+    }
+
+  };
+
+
+
   return (
 
-    <div>
+    <div className="container py-5">
 
-      <h1>
-        My Watchlist 🎬
+
+      <h1 className="text-center mb-5">
+
+        🎬 My Watchlist
+
       </h1>
 
 
-      {movies.map(movie => (
 
-        <div key={movie.id}>
-
-
-          <h2>
-            {movie.title}
-          </h2>
+      <div className="row g-4">
 
 
-          <p>
-            Year: {movie.release_year}
-          </p>
+        {movies.map((movie) => (
 
 
-          <p>
-            Status: {movie.status}
-          </p>
+          <div
 
+            className="col-12 col-md-4 col-lg-3"
 
-          {movie.poster_url &&
-            <img
-              src={movie.poster_url}
-              width="150"
-            />
-          }
+            key={movie.id}
 
-
-          <br/>
-
-
-          <button
-            onClick={() =>
-              deleteMovie(movie.id)
-            }
           >
-            Remove
-          </button>
 
 
-          <hr/>
+            <div
+
+              className="card bg-dark text-white shadow border-0 h-100"
+
+            >
 
 
-        </div>
 
-      ))}
+              {movie.poster_url &&
+
+
+                <img
+
+                  src={movie.poster_url}
+
+                  className="card-img-top"
+
+                  alt={movie.title}
+
+                  style={{
+
+                    height:"420px",
+
+                    objectFit:"cover"
+
+                  }}
+
+                />
+
+              }
+
+
+
+              <div className="card-body d-flex flex-column">
+
+
+
+                <h5>
+
+                  {movie.title}
+
+                </h5>
+
+
+
+                <p className="text-secondary">
+
+                  {movie.release_year}
+
+                </p>
+
+
+
+
+                <div className="mb-3">
+
+
+                  <label className="form-label">
+
+                    Status
+
+                  </label>
+
+
+
+                  <select
+
+                    className="form-select"
+
+                    value={movie.status}
+
+                    onChange={(e) =>
+
+                      updateStatus(
+
+                        movie.id,
+
+                        e.target.value
+
+                      )
+
+                    }
+
+                  >
+
+
+                    <option value="watching">
+
+                      Watching
+
+                    </option>
+
+
+                    <option value="completed">
+
+                      Completed
+
+                    </option>
+
+
+                    <option value="plan_to_watch">
+
+                      Plan To Watch
+
+                    </option>
+
+
+                  </select>
+
+
+
+
+                  <div className="mt-3">
+
+
+                    <span
+
+                      className={`badge ${getStatusClass(movie.status)}`}
+
+                    >
+
+                      {getStatusLabel(movie.status)}
+
+                    </span>
+
+
+                  </div>
+
+
+
+                </div>
+
+
+
+
+                <button
+
+                  className="btn btn-danger mt-auto"
+
+                  onClick={() =>
+
+                    deleteMovie(movie.id)
+
+                  }
+
+                >
+
+                  🗑 Remove
+
+                </button>
+
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        ))}
+
+
+      </div>
 
 
     </div>
